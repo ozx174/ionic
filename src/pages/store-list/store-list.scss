@@ -1,0 +1,91 @@
+page-store-list {
+  .header-wrapper {
+    display: flex;
+    height: 6.9rem;
+    background-color: #29ADFD;
+    padding-top: 2.5rem;
+    .back-btn {
+      width: 4.8rem;
+      background: url("../assets/img/tab_store/back-satreo.png") no-repeat center;
+      background-size: 2.4rem 2.4rem;
+    }
+    .news-btn {
+      width: 4.8rem;
+      background: url("../assets/img/index/bellNoShadow.png") no-repeat center;
+      background-size: 2.5rem 2.5rem;
+    }
+    .search-btn {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding-top: 0.65rem;
+      div {
+        height: 2.7rem;
+        background-color: #f4f4f4;
+        border-radius: 100px;
+        width: 100%;
+        color: #aaa;
+        display: flex;
+        justify-content: center;
+        ion-icon {
+          line-height: 2.7rem;
+        }
+      }
+    }
+  }
+  .nav-bar {
+    display: flex;
+    div {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      span, ion-icon {
+        height: 4rem;
+        line-height: 4rem;
+        font-size: 1.4rem;
+        color: #666;
+      }
+    }
+  }
+  .address-box {
+    display: flex;
+    margin:0 1rem;
+    div:first-child {
+      width: 4.75rem;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      padding-top:0.6rem;
+      i {
+        width: 1.6rem;
+        height: 1.6rem;
+        background: url("../assets/img/store_list/sprite_store_list_1492838090000.png") no-repeat;
+        background-position: 0 -4.7rem;
+        background-size: 8.6rem 6.3rem;
+      }
+    }
+    div:nth-child(2) {
+      flex: 1;
+      line-height: 3rem;
+      color:#666;
+    }
+    div:last-child {
+      width: 2rem;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      padding-top:0.6rem;
+      i {
+        width: 1.6rem;
+        height: 1.6rem;
+        background: url("../assets/img/store_list/sprite_store_list_1492838090000.png") no-repeat;
+        background-position: -1.7rem -4.7rem;
+        background-size: 8.6rem 6.3rem;
+      }
+    }
+  }
+
+  .has-refresher > .scroll-content {
+    border-top: 0;
+  }
+}

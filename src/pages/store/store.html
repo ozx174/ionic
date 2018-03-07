@@ -1,0 +1,73 @@
+<!--
+  Generated template for the StorePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <div class="store-header" #storeHeader>
+    <div class="back-btn" (click)="back()">
+      <i></i>
+    </div>
+    <div class="text" *ngIf="banners">{{slideIndex + 1}}/{{banners.length}}</div>
+    <div class="like-btn">
+      <i></i>
+    </div>
+    <div class="comment-btn">
+      <i></i>
+    </div>
+  </div>
+</ion-header>
+<ion-content (ionScroll)="changTitle($event)">
+  <div class="banner-wrapper">
+      <ion-slides *ngIf="banners" autoplay="2000" loop="true" (ionSlideWillChange)='getSlideIndex($event)'>
+        <ion-slide *ngFor="let banner of banners">
+          <img src="{{banner}}" alt="">
+        </ion-slide>
+      </ion-slides>
+    <div class="btn-wrapper">
+      <div>赠豆&nbsp;{{saleRate}}%</div>
+      <div>买&nbsp;单</div>
+    </div>
+  </div>
+  <div class="store-info-wrapper">
+    <div class="title bor-bot">
+      <p>{{name}}</p>
+      <div>
+        <star [score]="commentGrade" *ngIf="commentGrade"></star>
+        {{paymentCount}}人已消费
+      </div>
+    </div>
+    <div class="address-wrapper">
+      <div class="addr-info">
+        <i></i>
+        {{address}}
+      </div>
+      <div class="b-map" (click)="bmap()">
+        <i></i>
+        <p>&lt;0.01m</p>
+      </div>
+    </div>
+    <div class="time-wrapper">
+      <div class="time-text">营业时间：8:30-22:31</div>
+      <div class="phone" (click)="daCall()">
+        <i></i>
+      </div>
+    </div>
+  </div>
+  <div class="evaluate-wrapper">
+    <div class="title bor-bot">
+      <div>综合评价 （{{commentGrade}}分）</div>
+      <div>我的评价&nbsp;&nbsp;<ion-icon name="ios-arrow-forward-outline"></ion-icon>
+      </div>
+    </div>
+    <div class="list bor-bot" *ngFor="let list of commentLists">
+      <p>打分&nbsp;<star [score]="list.grade"></star>
+        <span>{{list.name}}</span></p>
+      <i *ngFor="let item of list.labels">{{item}}</i>
+    </div>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,12 @@
+<!-- Generated template for the StoreItemComponent component -->
+<div class="store-item-wrapper bor-bot">
+  <div class="img-box">
+    <img src="{{storeData.images}}" err-src alt="">
+  </div>
+  <div class="info-box">
+    <h1>{{storeData.shortName}}</h1>
+    <p><star [score]="storeData.commentGrade"></star><span class="score">{{storeData.commentGrade}}分</span><span>{{storeData.paymentCount}}人已消费</span></p>
+    <p>{{storeData.areaName || storeData.city}}·{{storeData.categoryName}} | ￥{{storeData.perCapita || '0.00'}}元/人  &lt;{{storeData.distance}}m</p>
+    <div class="foucs-info"><p><span class="font">{{storeData.saleRate}}%</span></p><span>赠豆</span></div>
+  </div>
+</div>

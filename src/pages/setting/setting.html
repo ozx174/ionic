@@ -1,0 +1,33 @@
+<!--
+  Generated template for the SettingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>我的设置</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list inset>
+    <button class="item-btn bor-bot" ion-item  (click)="linkPaymentSetting()">
+      支付设置
+    </button>
+    <button class="item-btn bor-bot" ion-item  (click)="linkSecurity($event)">
+      安全中心
+    </button>
+    <button class="item-btn bor-bot" ion-item  (click)="itemSelected(item)">
+      消息通知提醒
+    </button>
+    <split></split>
+    <button class="item-btn bor-bot" ion-item  (click)="itemSelected(item)">
+      去点赞
+    </button>
+    <button class="item-btn bor-bot" ion-item  (click)="itemSelected(item)">
+      关于给乐
+    </button>
+  </ion-list>
+  <button class="logout-btn" (click)="logout()">退出登录</button>
+</ion-content>

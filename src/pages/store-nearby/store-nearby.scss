@@ -1,0 +1,75 @@
+page-store-nearby {
+  .header-top {
+    background-color: #29ADFD;
+    position: relative;
+    padding: 35px 15px 0;
+  }
+  .industry-nav {
+    display: flex;
+    background-color: #22A5F4;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    padding:3px;
+    border-radius: 100px;
+    li {
+      flex:1;
+      height: 29px;
+      border-radius: 100px;
+      font-size: 14px;
+      text-align: center;
+      line-height: 29px;
+      letter-spacing: 2px;
+      color:#fff;
+      &.block {
+        background-color: #fff;
+        color:#29ADFD;
+      }
+    }
+  }
+  .classification-container {
+    height: 40px;
+  }
+  .classification-wrapper {
+    white-space:nowrap;
+    li {
+      display: inline-block;
+      margin:0 5px;
+      line-height: 32px;
+      padding:0 2px;
+      font-size: 13px;
+      color:#fff;
+      &.block {
+        border-bottom: 2px solid #fff;
+      }
+    }
+  }
+  .store-list-header {
+    height: 47px;
+    background-color: #fff;
+    line-height: 44px;
+    position: relative;
+    z-index: 99;
+    padding-top: 2px;
+    display: flex;
+    .search {
+      line-height: 40px;
+      margin: 0 12px;
+      flex: 1;
+      -webkit-flex: 1;
+      a {
+        width: 100%;
+        line-height: 27px;
+        height: 27px;
+        display: inline-block;
+        background-color: #f4f4f4;
+        border-radius: 27px;
+        font-size: 12px;
+        color: #aaa;
+        text-align: center;
+        ion-icon {
+          font-size: 16px;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}

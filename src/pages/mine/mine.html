@@ -1,0 +1,90 @@
+<!--
+  Generated template for the MinePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <div class="header-wrapper" [ngClass]="{'header-top-mode': topMode}">
+    <i class="setting" (click)="linkSetting()"></i>
+    <i class="news"></i>
+    <div class="img-box" [ngClass]="{'img-box-top-mode': topMode}">
+      <img src="{{baseInfo.photo || './assets/img/df-u-img.png'}}" err-src="./assets/img/df-u-img.png" alt="">
+    </div>
+    <div class="mine-info" [ngClass]="{'mine-info-top-mode ': topMode}">
+      <div>
+        <i></i>
+        <p>个人中心</p>
+      </div>
+      <div>
+        <i>{{bean}}</i>
+        <p>乐豆余额（豆）</p>
+      </div>
+      <div>
+        <i>{{bankList.length}}</i>
+        <p>银行卡</p>
+      </div>
+    </div>
+  </div>
+  <div class="bill-nav">
+    <h1>我的账单</h1>
+    <p class="month-nav"><span>2017年12月账单</span><span>（滑动查看月账单）</span></p>
+    <ion-slides class="banner-wrapper"
+                pager="true"
+                initialSlide="{{slideIndex}}"
+                (ionSlideDidChange)="slideChanged()">
+      <ion-slide *ngFor="let list of lists">
+        <div>
+          <p>{{list?list.totalMoney.toFixed(2) : '****'}}</p>
+          <p>现金支付（元）</p>
+        </div>
+        <div>
+          <p>{{list?list.totalPayHappyCoin.toFixed(2) : '****'}}</p>
+          <p>乐豆支付（豆）</p>
+        </div>
+        <div>
+          <p>{{list?list.totalReturnHappyCoin.toFixed(2) : '****'}}</p>
+          <p>赠送乐豆（豆）</p>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-header>
+<ion-content>
+  <ul class="bill-container">
+    <div *ngIf="lists[slideIndex]">
+      <li class="bill-item bor-bot" *ngFor="let bill of lists[slideIndex]['list']" (click)="linkBillDetais(bill)">
+        <i class="type-icon" [ngSwitch]="bill.operationName">
+          <img *ngSwitchCase="'消费'" src="./assets/img/mine/xiao.png" alt="">
+          <img *ngSwitchCase="'退款'" src="./assets/img/mine/tui.png" alt="">
+          <img *ngSwitchCase="'乐抢单'" src="./assets/img/mine/qun.png" alt="">
+          <img *ngSwitchCase="'打赏'" src="./assets/img/mine/shang.png" alt="">
+        </i>
+        <h1>汇点生活</h1>
+        <div class="bill-content">
+          <div class="content-left">
+            <p>2017-10-31 15:57:51</p>
+            <p>0.01</p>
+            <p>交易总金额（元）</p>
+          </div>
+          <div class="content-right">
+            <p><span>现金支付（元）</span><span>0.01</span></p>
+            <p><span>乐豆支付（豆）</span><span>0.00</span></p>
+            <p><span>赠送乐豆（豆）</span><span>0.00</span></p>
+          </div>
+        </div>
+      </li>
+    </div>
+  </ul>
+  <div *ngIf="lists[slideIndex]">
+    <div class="no-bill" *ngIf="lists[slideIndex]['list'].length === 0">
+      <img src="./assets/img/mine/no-bill.png" alt="">
+      <p>你目前还没有帐单记录</p>
+      <p>使用乐豆支付买单更优惠！</p>
+      <div class="msg-btn" (click)="linkStore()">去看看附近商家</div>
+    </div>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

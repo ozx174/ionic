@@ -1,0 +1,28 @@
+page-setting {
+  .list {
+    margin: 0 !important;
+  }
+  .label {
+    font-size: 14px !important;
+    color: #666;
+  }
+  .item-btn {
+    border: 0!important;
+  }
+  ion-content > .scroll-content {
+    background-color: #f4f4f4;
+  }
+
+  .logout-btn {
+    width: 80%;
+    height: 44px;
+    line-height: 44px;
+    background-color: #29adfd;
+    border-radius: 100px;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    display: block;
+    margin: 40px auto;
+  }
+}

@@ -1,0 +1,64 @@
+<!--
+  Generated template for the BillDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>账单详情</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="bill">
+    <div class="header-box">
+      <div class="pic-box">
+        <img src="{{storeInfo.image}}" err-src alt="" *ngIf="storeInfo">{{bill.merchantName}}
+      </div>
+      <div class="money-box">
+        <span>￥</span><span>{{bill.money | moneyUnit}}</span>
+      </div>
+      <p class="desc">退款成功</p>
+    </div>
+    <split></split>
+    <div class="detail-wrapper">
+      <p class="bor-bot">
+        支付单号<span class="ng-binding">{{bill.orderNo}}</span>
+      </p>
+    </div>
+    <div class="detail-wrapper">
+      <p class="bor-bot">
+        交易时间<span class="ng-binding">{{bill.paymentDate}}</span>
+      </p>
+    </div>
+    <div class="detail-wrapper">
+      <p class="bor-bot">
+        退款方式<span class="ng-binding">微信退款</span>
+      </p>
+    </div>
+    <split></split>
+    <div class="detail-wrapper">
+      <p class="bor-bot">
+        退回现金支付<span class="ng-binding">￥{{bill.realMoney | moneyUnit}}</span>
+      </p>
+    </div>
+    <div class="detail-wrapper">
+      <p class="bor-bot">
+        <i class="icon icon1">抵</i>
+        退回乐豆支付<span style="color: rgb(227, 124, 121)">{{bill.returnHappyCoin | moneyUnit}}豆</span>
+      </p>
+    </div>
+    <div class="detail-wrapper">
+      <p class="bor-bot">
+        <i class="icon icon2">赠</i>
+        收回消费抵扣<span style="color:rgb(248,169,48)">{{bill.happyCoin | moneyUnit}}豆</span>
+      </p>
+    </div>
+    <split></split>
+    <div class="detail-wrapper">
+      <p class="bor-bot">
+        摘要<span style="color:#666;">{{bill.operationName}}-{{bill.merchantName}}</span>
+      </p>
+    </div>
+  </div>
+</ion-content>

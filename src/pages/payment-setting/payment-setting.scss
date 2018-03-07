@@ -1,0 +1,17 @@
+page-payment-setting {
+  ion-item {
+    padding-left: 0 !important;
+    margin-top: 20px!important;
+    .item-inner {
+      border: 0!important;
+      padding-left: 20px;
+    }
+    ion-label {
+      font-size: 14px;
+      color:#333;
+    }
+  }
+  .scroll-content {
+    background-color: #f4f4f4;
+  }
+}

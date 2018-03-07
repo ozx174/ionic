@@ -1,0 +1,13 @@
+star {
+  div {
+    span {
+      display: inline-block;
+      background: url("../assets/img/tab_store/icon_24_2.png") no-repeat center;
+      background-size: 100% 100%;
+      &.star-24 {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+    }
+  }
+}

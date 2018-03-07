@@ -1,0 +1,73 @@
+page-bill-details {
+  .scroll-content {
+    background-color: #f4f4f4;
+  }
+  .header-box {
+    background-color: #fff;
+  }
+  .pic-box {
+    padding-top: 15px;
+    text-align: center;
+    font-size: 16px;
+    vertical-align: middle;
+    font-weight: 500;
+    img {
+      width: 25px;
+      height: 25px;
+      vertical-align: middle;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  }
+  .money-box {
+    text-align: center;
+    height: 40px;
+    line-height: 25px;
+    color: #4ED500;
+    padding-top: 10px;
+    span:first-child {
+      font-size: 10px;
+    }
+    span:last-child {
+      font-size: 25px;
+    }
+  }
+  .desc {
+    color: #4ED500;
+    font-size: 12px;
+    text-align: center;
+    padding-bottom: 17px;
+  }
+  .detail-wrapper {
+    padding: 0 15px;
+    background: #fff;
+    p {
+      height: 45px;
+      line-height: 45px;
+      position: relative;
+      font-size: 14px;
+      vertical-align: middle;
+      span {
+        float: right;
+      }
+      .icon {
+        display: inline-block;
+        width: 15px;
+        text-align: center;
+        height: 15px;
+        line-height: 15px;
+        font-size: 12px;
+        border-radius: 2px;
+        color: #fff;
+        margin-right: 4px;
+        vertical-align: middle;
+      }
+      .icon1 {
+        background: #F07373;
+      }
+      .icon2 {
+        background: #FFA702;
+      }
+    }
+  }
+}

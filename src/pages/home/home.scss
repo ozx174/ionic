@@ -1,0 +1,171 @@
+page-home {
+  background: #f4f4f4;
+  .header-wrapper {
+    height: 14.5rem;
+    background-color: #29ADFD;
+    padding-top: 2rem;
+    padding-left: 1.5rem;
+    color: #fff;
+    .search-box {
+      display: flex;
+      color: #fff;
+      margin-top: 0.6rem;
+    }
+    .search-1 {
+      flex: 1;
+      height: (6.4rem/2);
+      line-height: (6.4rem/2);
+      background: #22A5F4;
+      box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 10rem;
+      display: flex;
+      justify-content: center;
+      ion-icon {
+        line-height: 3.2rem;
+        margin-left: 0.8rem;
+      }
+      .search {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        font-size: 1.4rem;
+        ion-icon {
+          font-size: 1.9rem;
+          margin-right: 0.8rem;
+        }
+      }
+      .address {
+        margin-left: 1.5rem;
+      }
+    }
+    .search-2 {
+      width: (5rem/2);
+      height: (5rem/2);
+      margin: 0.4rem 1.2rem 1rem 1.2rem;
+      background: url('../assets/img/index/bellNoShadow.png') no-repeat center;
+      background-size: 100% 100%;
+    }
+    .tools-bar {
+      display: flex;
+      padding-left: 1rem;
+      margin-top:1rem;
+      .tool-left {
+        flex: 1;
+        .top {
+          display: flex;
+          div:first-child {
+            font-size: 3.7rem;
+          }
+          div:last-child {
+            font-size: 1.2rem;
+            margin-left: 0.6rem;
+            p {
+              margin: 0.5rem;
+            }
+          }
+        }
+        .bottom {
+          font-size: 1.2rem;
+          span {
+            display: inline-block;
+            width: 1.8rem;
+            height: 1.2rem;
+            background: url('../assets/img/index/eye_close.png') no-repeat center;
+            background-size: 100% 100%;
+            margin-left: 0.8rem;
+          }
+        }
+      }
+      .tool-right {
+        width: 8rem;
+        .top {
+          margin:0.7rem 0.5rem 0.5rem 0.3rem;
+          img {
+            width: (5.8rem/2);
+            height: (5.8rem/2);
+          }
+        }
+        .bottom {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  .nav-wrapper {
+    height:16rem;
+    .slide-zoom {
+      height:100%;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      li {
+        width: 25%;
+        justify-content: center;
+        div {
+          width: 100%;
+          height: 6rem;
+        }
+      }
+      li:first-child{
+        div{
+          background: url('http://image-cdn.365gl.com/life/1.png') no-repeat;
+          background-size: 8.2rem 6rem;
+          background-position: center 1.8rem;
+        }
+      }
+      li:nth-child(2){
+        div{
+          background: url('http://image-cdn.365gl.com/life/2.png') no-repeat;
+          background-size: 8.2rem 6rem;
+          background-position: center 1.8rem;
+        }
+      }
+      li:nth-child(3){
+        div{
+          background: url('http://image-cdn.365gl.com/life/3.png') no-repeat;
+          background-size: 8.2rem 6rem;
+          background-position: center 1.8rem;
+        }
+      }
+      li:nth-child(4){
+        div{
+          background: url('http://image-cdn.365gl.com/life/4.png') no-repeat;
+          background-size: 8.2rem 6rem;
+          background-position: center 1.8rem;
+        }
+      }
+      li:nth-child(5){
+        div{
+          background: url('http://image-cdn.365gl.com/life/5.png') no-repeat;
+          background-size: 8.2rem 6rem;
+          background-position: center 1.8rem;
+        }
+      }
+      li:nth-child(6){
+        div{
+          background: url('http://image-cdn.365gl.com/life/6.png') no-repeat;
+          background-size: 8.2rem 6rem;
+          background-position: center 1.8rem;
+        }
+      }
+      li:nth-child(7){
+        div{
+          background: url('http://image-cdn.365gl.com/life/7.png') no-repeat;
+          background-size: 8.2rem 6rem;
+          background-position: center 1.8rem;
+        }
+      }
+      li:nth-child(8){
+        div{
+          background: url('http://image-cdn.365gl.com/life/8.png') no-repeat;
+          background-size: 8.2rem 6rem;
+          background-position: center 1.8rem;
+        }
+      }
+    }
+  }
+  .banner-wrapper {
+    height: 10rem;
+  }
+}
