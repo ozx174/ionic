@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController} from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
 /**
@@ -86,10 +86,12 @@ export class ScannerPage {
 
   showCamera() {
     (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
+    (window.document.querySelector('.tabbar') as HTMLElement).style.opacity = '0';
   }
   hideCamera() {
     this.qrScanner.hide();//需要关闭扫描，否则相机一直开着
     (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
+    (window.document.querySelector('.tabbar') as HTMLElement).style.opacity = '1';
   }
 
   ionViewWillLeave() {
