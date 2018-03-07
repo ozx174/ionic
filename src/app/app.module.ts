@@ -5,6 +5,7 @@ import {CommonModule} from '@angular/common';
 import {MyApp} from './app.component';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
+import {QRScanner} from '@ionic-native/qr-scanner';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    QRScanner
   ]
 })
 export class AppModule {

@@ -3,7 +3,6 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {NavStore} from '../../class/nav-store';
 import {HttpClient} from '@angular/common/http';
 
-
 /**
  * Generated class for the HomePage page.
  *
@@ -40,5 +39,9 @@ export class HomePage {
     this.navCtrl.push('StoreListPage', {
       id: 1
     });
+  }
+
+  scanCode() {
+    this.navCtrl.push('ScannerPage')
   }
 }
