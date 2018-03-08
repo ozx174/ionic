@@ -40,7 +40,6 @@ export class StoreListPage implements OnInit {
     this.http
         .jsonp(this.url.substr(0,this.url.length-1) + this.page,'callback')
       .subscribe(res => {
-        console.log(res)
         if (this.page == 0) {
           this.stores = res['contents'];
         } else {

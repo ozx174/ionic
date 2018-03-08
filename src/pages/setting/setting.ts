@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, Navbar, App, ViewController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, App} from 'ionic-angular';
 import {CommonProvider} from '../../providers/common/common'
 
 /**
@@ -16,16 +16,13 @@ import {CommonProvider} from '../../providers/common/common'
   providers: [CommonProvider]
 })
 export class SettingPage {
-  @ViewChild(Navbar) navs: Navbar;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public common: CommonProvider,
-              public viewCtrl: ViewController,
               public appCtrl: App) {}
 
   ionViewDidLoad() {
-    this.navs.setBackButtonText('返回')
   }
 
   logout() {

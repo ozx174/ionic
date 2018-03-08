@@ -15,7 +15,9 @@ import {QRScanner} from '@ionic-native/qr-scanner';
     BrowserModule,
     CommonModule,
     IonicModule.forRoot(MyApp, {
-      tabsHideOnSubPages: 'true'
+      tabsHideOnSubPages: 'true',
+      backButtonText: '返回',
+      pageTransition: 'ios-transition'
     }),
   ],
   bootstrap: [IonicApp],
