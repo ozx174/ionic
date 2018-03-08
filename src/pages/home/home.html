@@ -15,7 +15,7 @@
         <ion-icon name="ios-search"></ion-icon>输入商家名称
       </span>
       </div>
-      <div class="search-2"></div>
+      <div class="search-2" (click)="testImgPicker()"></div>
     </div>
     <div class="tools-bar">
       <div class="tool-left">
@@ -72,7 +72,7 @@
   </div>
   <split></split>
   <div>
-    <img src="./assets/img/index/bean_explain.png" alt="">
+    <img src="{{newImg}}" alt="">
   </div>
   <split></split>
 </ion-content>

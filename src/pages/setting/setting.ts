@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, App} from 'ionic-angular';
-import {CommonProvider} from '../../providers/common/common'
+import {CommonProvider} from '../../providers/common/common';
+import {Toast} from '@ionic-native/toast';
 
 /**
  * Generated class for the SettingPage page.
@@ -20,7 +21,9 @@ export class SettingPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public common: CommonProvider,
-              public appCtrl: App) {}
+              public appCtrl: App,
+              private toast: Toast) {
+  }
 
   ionViewDidLoad() {
   }
@@ -45,4 +48,16 @@ export class SettingPage {
   linkSecurity() {
     this.navCtrl.push('SecurityPage');
   }
+
+  testToast() {
+    this.toast.show('测试toast消息', '5000', 'center').subscribe(
+      toast => {
+        console.log(toast);
+      },
+      e => {
+        console.log(e)
+      }
+    );
+  }
+
 }

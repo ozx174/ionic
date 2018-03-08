@@ -2,6 +2,9 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {NavStore} from '../../class/nav-store';
 import {HttpClient} from '@angular/common/http';
+import {ImagePicker} from '@ionic-native/image-picker';
+import {ImageResizer, ImageResizerOptions} from '@ionic-native/image-resizer';
+import { Crop } from '@ionic-native/crop';
 
 /**
  * Generated class for the HomePage page.
@@ -17,7 +20,12 @@ import {HttpClient} from '@angular/common/http';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public http: HttpClient,
+              private imagePicker: ImagePicker,
+              private imageResizer: ImageResizer,
+              private crop: Crop) {
   }
 
   ionViewDidLoad() {
@@ -41,7 +49,32 @@ export class HomePage {
     });
   }
 
+  newImg:string;
+
   scanCode() {
     this.navCtrl.push('ScannerPage')
+  }
+
+  testImgPicker() {
+    this.imagePicker.getPictures({maximumImagesCount: 1}).then((results) => {
+      alert('Image URI: ' + results[0]);
+      let options = {
+        uri: results[0],
+        quality: 90,
+        width: 200,
+        height: 100
+      } as ImageResizerOptions;
+      this.imageResizer
+        .resize(options)
+        .then((filePath: string) => {
+          this.crop.crop(filePath, {quality: 75, targetWidth:200, targetHeight:100})
+            .then(
+              newImage => this.newImg =  newImage,
+              error => console.error('Error cropping image', error)
+            )
+        })
+        .catch(e => console.log(e));
+    }, (err) => {
+    });
   }
 }
