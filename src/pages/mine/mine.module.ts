@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
 import {IonicPageModule} from 'ionic-angular';
 import {MinePage} from './mine';
-import {HttpClientModule} from '@angular/common/http';
-import { ErrSrcDirectiveModule } from '../../directives/err-src/err-src.module';
+import {ErrSrcDirectiveModule} from '../../directives/err-src/err-src.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +9,6 @@ import { ErrSrcDirectiveModule } from '../../directives/err-src/err-src.module';
   ],
   imports: [
     IonicPageModule.forChild(MinePage),
-    HttpClientModule,
     ErrSrcDirectiveModule,
   ],
 })

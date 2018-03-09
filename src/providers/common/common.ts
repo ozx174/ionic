@@ -23,6 +23,8 @@ export class CommonProvider {
   clientVersion: string = '6.2.0';
   time: number;
   token: string;
+  ERR_OK: string = '000000';
+  ERR_LOGIN: string = '000001'; // Unused field
 
   $http(method: string, url: string, reqData?: Object, loading?: boolean): Observable<any> {
     this.time = Math.floor(new Date().getTime() / 1000);

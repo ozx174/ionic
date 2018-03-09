@@ -12,6 +12,7 @@ import {ScreenOrientation} from '@ionic-native/screen-orientation';
 import {ImagePicker} from '@ionic-native/image-picker';
 import { ImageResizer } from '@ionic-native/image-resizer';
 import { Crop } from '@ionic-native/crop';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { Crop } from '@ionic-native/crop';
   imports: [
     BrowserModule,
     CommonModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: 'true',
       backButtonText: '返回',

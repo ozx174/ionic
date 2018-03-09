@@ -1,11 +1,12 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
 import {IonicPage, NavController, NavParams, Slides, Content} from 'ionic-angular';
 import {CommonProvider} from '../../providers/common/common';
+import {MineServiceProvider} from '../../providers/services/mine.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/switchMap';
-import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/map';
 
 /**
@@ -14,12 +15,11 @@ import 'rxjs/add/operator/map';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
 @IonicPage()
 @Component({
   selector: 'page-mine',
   templateUrl: 'mine.html',
-  providers: [CommonProvider]
+  providers: [CommonProvider, MineServiceProvider]
 })
 export class MinePage {
   @ViewChild(Slides) slides: Slides;
@@ -28,50 +28,19 @@ export class MinePage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private common: CommonProvider,
-              private el: ElementRef) {
+              private el: ElementRef,
+              private mineServiceProvider: MineServiceProvider) {
   }
 
   private ERR_OK = '000000';
+  private ERR_LOGIN = '000001';
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     // 获取个人基本信息
     this.baseInfo = JSON.parse(localStorage.getItem('baseInfo'));
-
-    // 取乐豆余额
-    if (localStorage.getItem('token')) {
-      this.common.$http('GET', 'https://loclife.365gl.com/lifeAPI/payment/user/happycoin/', null)
-        .subscribe(res => {
-          if (res['result'] === this.ERR_OK) {
-            this.bean = res['data']['amount']
-          } else if (res['result'] === '000001') {
-            this.common.$alert(res['description'], null, null, function () {
-              localStorage.clear()
-            })
-          } else {
-            this.common.$alert(res['description'])
-          }
-        });
-    }
   }
 
   ionViewDidLoad() {
-    // 获取银行卡
-    this.common.$http('GET', 'https://loclife.365gl.com/lifeAPI/payment/fft/card/', {
-      'type': 0,
-      'isNeedPos': true,
-      "apiVersion": "V1.1.0"
-    }).subscribe(res => {
-      if (res['result'] === this.ERR_OK) {
-        this.bankList = res['data'];
-      } else if (res['result'] === '000001') {
-        this.common.$alert(res['description'], null, null, function () {
-          localStorage.clear()
-        })
-      } else {
-        this.common.$alert(res['description']);
-      }
-    });
-
     let pre_t: number = 0;
     let t: number = 0;
     let _content = this.content;
@@ -83,9 +52,9 @@ export class MinePage {
       t = $event.touches[0].screenY;
     });
 
-    this.el.nativeElement.addEventListener('touchend', ABC.bind(this));
+    this.el.nativeElement.addEventListener('touchend', _animate.bind(this));
 
-    function ABC() {
+    function _animate() {
       if (t - pre_t > 0) {
         if (this.content.scrollTop < 10) {
           this.topMode = false;
@@ -106,11 +75,11 @@ export class MinePage {
     }
   }
 
-
-  private bean: string;  // 乐豆数量
+  private bean: string = '0';  // 乐豆数量
   private baseInfo: Object = {};  // 个人基础信息
   private bankList: Array<any> = [];  // 银行卡列表
   topMode: boolean = false; // 上拉浏览模式
+  rsp: boolean = true;
 
   private lists: Array<any> = [null, null, null, null, null, null];  // 账单各月份总列表
   private noMoreMonth: Array<boolean> = [false, false, false, false, false, false]; // 各月是否还能加载更多
@@ -129,44 +98,60 @@ export class MinePage {
     this.navCtrl.push('StoreListPage');
   }
 
-
-  // 滑动账单观察对象
-  private slide$ = new Subject();
-
   // 滑动切换月份触发方法
   public slideChanged() {
     if (this.slides.getActiveIndex() > 5 || this.slides.getActiveIndex() < 0) {
       return;
     }
     this.slideIndex = this.slides.getActiveIndex();
-    if (!this.lists[this.slideIndex]) {
-      this.slide$.next();
+    if (this.rsp) {
+      Observable.forkJoin(this.getBillInfo(this.monthIndex[this.slideIndex], this.slideIndex), this.getCards(), this.getCoin())
+        .subscribe(res => {
+          for (let i = 0; i < res.length; i++) {
+            if (res[i].result === this.ERR_LOGIN) {
+              this.common.$alert(res[i]['description'], null, null, function () {
+                localStorage.clear();
+              });
+              return
+            }
+          }
+          if (res[0]['result'] === this.ERR_OK) {
+            this.lists[this.slideIndex] = res[0]['data'];
+            if (res[0]['data']['list'].length < 10) {
+              this.noMoreMonth[this.slideIndex] = true;
+            }
+            this.monthPage[this.slideIndex]++;
+          } else {
+            this.common.$alert(res[0]['description']);
+          }
+          if (res[1]['result'] === this.ERR_OK) {
+            this.bankList = res[1]['data'];
+          }
+          if (res[2]['result'] === this.ERR_OK) {
+            this.bean = res[2]['data']['amount'];
+          }
+          this.rsp = false;
+        });
+      return;
+    } else if (!this.lists[this.slideIndex]) {
+      this.getBillInfo(this.monthIndex[this.slideIndex], this.slideIndex)
+        .subscribe(res => {
+          if (res['result'] === this.ERR_OK) {
+            this.lists[this.slideIndex] = res['data'];
+            if (res['data']['list'].length < 10) {
+              this.noMoreMonth[this.slideIndex] = true;
+            }
+            this.monthPage[this.slideIndex]++;
+          } else if (res['result'] === '000001') {
+            this.common.$alert(res['description'], null, null, function () {
+              localStorage.clear()
+            })
+          } else {
+            this.common.$alert(res['description'])
+          }
+        });
     }
   }
-
-  // 订阅滑动事件
-  billData = this.slide$
-    .switchMap(() => this.getBillInfo(this.monthIndex[this.slideIndex], this.slideIndex))
-    .catch(error => {
-      // TODO: add real error handling
-      console.log(error);
-      return Observable.of([]);
-    })
-    .subscribe(res => {
-      if (res['result'] === this.ERR_OK) {
-        this.lists[this.slideIndex] = res['data'];
-        if (res['data']['list'].length < 10) {
-          this.noMoreMonth[this.slideIndex] = true;
-        }
-        this.monthPage[this.slideIndex]++;
-      } else if (res['result'] === '000001') {
-        this.common.$alert(res['description'], null, null, function () {
-          localStorage.clear()
-        })
-      } else {
-        this.common.$alert(res['description'])
-      }
-    });
 
   // 上拉加载更多
   loadMore($event) {
@@ -187,7 +172,7 @@ export class MinePage {
 
   // 取账单方法
   private getBillInfo(monthIndex, index): Observable<any[]> {
-    return this.common.$http('GET', 'https://loclife.365gl.com/lifeAPI/payment/bill', {
+    return this.mineServiceProvider.getBillInfo({
       month: monthIndex,
       curPage: this.monthPage[index],
       pageSize: 10
@@ -199,6 +184,16 @@ export class MinePage {
     this.navCtrl.push('BillDetailsPage', {
       bill: bill
     });
+  }
+
+  // 获取乐豆方法
+  getCoin() {
+    return this.mineServiceProvider.getCoin();
+  }
+
+  // 获取银行卡
+  getCards() {
+    return this.mineServiceProvider.getCards();
   }
 
   // 跳转设置页面
