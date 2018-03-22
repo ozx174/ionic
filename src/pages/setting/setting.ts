@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, App} from 'ionic-angular';
 import {CommonProvider} from '../../providers/common/common';
+import {LoginServiceProvider} from '../../providers/services/login.service';
 import {Toast} from '@ionic-native/toast';
 
 /**
@@ -14,7 +15,7 @@ import {Toast} from '@ionic-native/toast';
 @Component({
   selector: 'page-setting',
   templateUrl: 'setting.html',
-  providers: [CommonProvider]
+  providers: [CommonProvider, LoginServiceProvider]
 })
 export class SettingPage {
 
@@ -22,7 +23,8 @@ export class SettingPage {
               public navParams: NavParams,
               public common: CommonProvider,
               public appCtrl: App,
-              private toast: Toast) {
+              private toast: Toast,
+              private loginService: LoginServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -34,7 +36,7 @@ export class SettingPage {
 
   // 退出绑定函数，需要绑定this对象
   out() {
-    this.common.$http('DELETE', 'https://loclife.365gl.com/lifeAPI/logout')
+    this.loginService.logout()
       .subscribe(res => {
         localStorage.clear();
         this.appCtrl.getRootNav().push('TabsPage');

@@ -16,6 +16,11 @@ export class LoginServiceProvider {
     return this.req.$loginHttp('POST', `${ENV.backend}/lifeAPI/login`, params)
   }
 
+  //登出
+  logout() {
+    return this.req.$http('DELETE', `${ENV.backend}/lifeAPI/logout`)
+  }
+
   // 获取个人信息
   getUserInfo() {
     return this.req.$http('GET', `${ENV.backend}/lifeAPI/user/info`)
