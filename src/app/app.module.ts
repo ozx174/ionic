@@ -13,6 +13,7 @@ import {ImagePicker} from '@ionic-native/image-picker';
 import { ImageResizer } from '@ionic-native/image-resizer';
 import { Crop } from '@ionic-native/crop';
 import {HttpClientModule} from '@angular/common/http';
+import {RequestProvider} from '../providers/services/request.service'
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {HttpClientModule} from '@angular/common/http';
     ScreenOrientation,
     ImagePicker,
     ImageResizer,
-    Crop
+    Crop,
+    RequestProvider
   ]
 })
 export class AppModule {

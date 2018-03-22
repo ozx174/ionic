@@ -7,8 +7,7 @@ import 'rxjs/add/operator/mergeMap';
 import {RegPhone} from '../../class/httpOption';
 import 'rxjs/add/operator/filter';
 import 'rxjs/Observable/of';
-import {CommonProvider} from '../../providers/common/common';
-import {App} from "ionic-angular";
+import {LoginServiceProvider} from  '../../providers/services/login.service';
 
 
 /**
@@ -22,7 +21,7 @@ import {App} from "ionic-angular";
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [CommonProvider]
+  providers: [LoginServiceProvider]
 })
 export class LoginPage {
 
@@ -30,8 +29,9 @@ export class LoginPage {
               public navParams: NavParams,
               public elem: ElementRef,
               public alertCtrl: AlertController,
-              public common: CommonProvider,
-              private viewCtrl: ViewController,private appCtrl: App) {
+              private viewCtrl: ViewController,
+              private appCtrl: App,
+              private loginService: LoginServiceProvider) {
   }
 
   btn: HTMLElement;
@@ -41,7 +41,7 @@ export class LoginPage {
 
   // 返回方法
   back() {
-    if (this.navParams['data']['logBackIn']){
+    if (this.navParams['data']['logBackIn']) {
       this.viewCtrl.dismiss();
       this.appCtrl.getRootNav().push('TabsPage');
     } else {
@@ -78,11 +78,17 @@ export class LoginPage {
             observer.next({'result': '999999', text: '手机格式不正确'})
           })
         } else {
-          return this.common.$loginHttp('POST', 'https://loclife.365gl.com/lifeAPI/login', {
+          // return this.common.$loginHttp('POST', 'https://loclife.365gl.com/lifeAPI/login', {
+          //   deviceName: "test",
+          //   deviceVersion: "7.0.0",
+          //   password: "983692abba1437188b734e566386ad6c",
+          //   username: "15013756335",
+          // })
+          return this.loginService.login({
             deviceName: "test",
             deviceVersion: "7.0.0",
             password: "983692abba1437188b734e566386ad6c",
-            username: "15013756335",
+            username: "15013756335"
           })
         }
       })
@@ -90,7 +96,7 @@ export class LoginPage {
         res => {
           if (res['result'] === this.ERR_OK) {
             localStorage.setItem('token', res['data'].token);
-            this.common.$http('GET', 'https://loclife.365gl.com/lifeAPI/user/info')
+            this.loginService.getUserInfo()
               .subscribe(data => {
                 localStorage.setItem('baseInfo', JSON.stringify(data.data));
                 a.unsubscribe();
