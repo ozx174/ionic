@@ -13,7 +13,7 @@ export class MineServiceProvider {
 
   //获取银行卡
   getCards() {
-    return this.common.$http('GET', 'https://loclife.365gl.com/lifeAPI/payment/fft/card/', {
+    return this.common.$http('GET', '/lifeAPI/payment/fft/card/', {
       'type': 0,
       'isNeedPos': true,
       "apiVersion": "V1.1.0"
@@ -22,11 +22,11 @@ export class MineServiceProvider {
 
   // 获取乐豆
   getCoin() {
-    return this.common.$http('GET', 'https://loclife.365gl.com/lifeAPI/payment/user/happycoin/', null)
+    return this.common.$http('GET', '/lifeAPI/payment/user/happycoin/', null)
   }
 
   //获取账单
   getBillInfo(data): Observable<any[]> {
-    return this.common.$http('GET', 'https://loclife.365gl.com/lifeAPI/payment/bill', data)
+    return this.common.$http('GET', '/lifeAPI/payment/bill', data)
   }
 }
