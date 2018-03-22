@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
-import {AlertController, LoadingController, ActionSheetController} from 'ionic-angular';
+import {AlertController, LoadingController, ActionSheetController, ModalController} from 'ionic-angular';
 
 /*
  Generated class for the CommonProvider provider.
@@ -15,7 +15,8 @@ export class CommonProvider {
   constructor(public http: HttpClient,
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController,
-              public actionSheetCtrl: ActionSheetController) {
+              public actionSheetCtrl: ActionSheetController,
+              public modalCtrl: ModalController) {
   }
 
   deviceId: string = 'test';
@@ -140,5 +141,13 @@ export class CommonProvider {
       ]
     });
     actionSheet.present();
+  }
+
+  logBackIn(Page?, func?) {
+    let modal = this.modalCtrl.create('LoginPage',{logBackIn: true});
+    modal.onDidDismiss(() => {
+      Page && Page[func]();
+    });
+    modal.present()
   }
 }

@@ -1,3 +1,3 @@
-export const str = {
+export const ENV = {
     backend: ''
 };

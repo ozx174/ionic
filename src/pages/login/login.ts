@@ -1,5 +1,5 @@
 import {Component, ElementRef} from '@angular/core';
-import {IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, AlertController, ViewController, App} from 'ionic-angular';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/operator/map';
@@ -8,6 +8,7 @@ import {RegPhone} from '../../class/httpOption';
 import 'rxjs/add/operator/filter';
 import 'rxjs/Observable/of';
 import {CommonProvider} from '../../providers/common/common';
+import {App} from "ionic-angular";
 
 
 /**
@@ -29,7 +30,8 @@ export class LoginPage {
               public navParams: NavParams,
               public elem: ElementRef,
               public alertCtrl: AlertController,
-              public common: CommonProvider) {
+              public common: CommonProvider,
+              private viewCtrl: ViewController,private appCtrl: App) {
   }
 
   btn: HTMLElement;
@@ -39,7 +41,12 @@ export class LoginPage {
 
   // 返回方法
   back() {
-    this.navCtrl.pop();
+    if (this.navParams['data']['logBackIn']){
+      this.viewCtrl.dismiss();
+      this.appCtrl.getRootNav().push('TabsPage');
+    } else {
+      this.navCtrl.pop();
+    }
   }
 
   // alert方法
