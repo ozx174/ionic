@@ -38,15 +38,15 @@ export class PaymentSettingPage {
     } else {
       postData['value'] = 1;
     }
-    this.common.$http('PUT', 'https://loclife.365gl.com/lifeAPI/user/enableHappyCoin', postData)
-      .subscribe(() => {
-        let baseInfo = JSON.parse(localStorage.getItem('baseInfo'));
-        if (postData['value'] === 0) {
-          baseInfo['enableHappyCoin'] = false;
-        } else {
-          baseInfo['enableHappyCoin'] = true;
-        }
-        localStorage.setItem('baseInfo', JSON.stringify(baseInfo));
-      })
+    // this.common.$http('PUT', 'https://loclife.365gl.com/lifeAPI/user/enableHappyCoin', postData)
+    //   .subscribe(() => {
+    //     let baseInfo = JSON.parse(localStorage.getItem('baseInfo'));
+    //     if (postData['value'] === 0) {
+    //       baseInfo['enableHappyCoin'] = false;
+    //     } else {
+    //       baseInfo['enableHappyCoin'] = true;
+    //     }
+    //     localStorage.setItem('baseInfo', JSON.stringify(baseInfo));
+    //   })
   }
 }

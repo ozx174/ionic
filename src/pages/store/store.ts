@@ -1,17 +1,13 @@
 import {Component, ViewChild, Renderer2} from '@angular/core';
 import {IonicPage, NavController, NavParams, Content, ModalController} from 'ionic-angular';
 import {CommonProvider} from "../../providers/common/common";
+import {RequestProvider} from '../../providers/services/request.service';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/observable/forkJoin';
 
-/**
- * Generated class for the StorePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 const ERR_OK = '000000';
+
 @IonicPage()
 @Component({
   selector: 'page-store',
@@ -25,7 +21,8 @@ export class StorePage {
               private render: Renderer2,
               private common: CommonProvider,
               public http: HttpClient,
-              private modal: ModalController) {
+              private modal: ModalController,
+              private req: RequestProvider) {
   }
 
   @ViewChild(Content) content: Content;
@@ -33,8 +30,8 @@ export class StorePage {
   ERR_OK = '000000';
 
   ionViewWillEnter() {
-    let OB1 = this.common.$http('get', `https://loclife.365gl.com/lifeAPI/merchant/detail/${this.navParams.get('id')}`);
-    let OB2 = this.common.$http('POST', 'https://loclife.365gl.com/lifeAPI/merchant/comments', {
+    let OB1 = this.req.$http('get', `https://loclife.365gl.com/lifeAPI/merchant/detail/${this.navParams.get('id')}`);
+    let OB2 = this.req.$http('POST', 'https://loclife.365gl.com/lifeAPI/merchant/comments', {
       merchantNo: this.navParams.get('id'),
       curPage: this.curPage,
       pageSize: 5
@@ -95,7 +92,7 @@ export class StorePage {
   }
 
   loadMore($event?) { // 加载更多评论
-    this.common.$http('POST', 'https://loclife.365gl.com/lifeAPI/merchant/comments', {
+    this.req.$http('POST', 'https://loclife.365gl.com/lifeAPI/merchant/comments', {
       merchantNo: this.navParams.get('id'),
       curPage: this.curPage,
       pageSize: 5
@@ -115,7 +112,12 @@ export class StorePage {
   }
 
   bmap() {  // 跳转百度地图
-    let modal = this.modal.create('BmapPage', {name: this.name,address:this.address,longitude: this.longitude, latitude: this.latitude});
+    let modal = this.modal.create('BmapPage', {
+      name: this.name,
+      address: this.address,
+      longitude: this.longitude,
+      latitude: this.latitude
+    });
     modal.present();
   }
 }

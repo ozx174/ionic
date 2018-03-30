@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams, Scroll, Content} from 'ionic-angular';
 import {HttpClient} from '@angular/common/http';
 import {CommonProvider} from '../../providers/common/common';
+import {RequestProvider} from '../../providers/services/request.service';
 import 'rxjs/add/operator/map';
 
 /**
@@ -15,14 +16,15 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-store-nearby',
   templateUrl: 'store-nearby.html',
-  providers: [CommonProvider],
+  providers: [CommonProvider, RequestProvider],
 })
 export class StoreNearbyPage implements OnInit {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private http: HttpClient,
-              private common: CommonProvider) {
+              private common: CommonProvider,
+              private req: RequestProvider) {
   }
 
   @ViewChild(Scroll) scroll: Scroll;
@@ -109,7 +111,7 @@ export class StoreNearbyPage implements OnInit {
   }
 
   getIndustry() {  // 获取行业信息
-    this.common.$http('get', 'https://loclife.365gl.com/lifeAPI/industry')
+    this.req.$http('get', 'https://loclife.365gl.com/lifeAPI/industry')
       .map(res => {
         let industry: Array<any>;
         let num = this.mainNavNum;

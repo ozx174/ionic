@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams, Navbar} from 'ionic-angular';
-import {CommonProvider} from '../../providers/common/common';
+import {RequestProvider} from '../../providers/services/request.service';
 import {Bill} from '../../class/bill';
 
 /**
@@ -14,18 +14,17 @@ import {Bill} from '../../class/bill';
 @Component({
   selector: 'page-bill-details',
   templateUrl: 'bill-details.html',
-  providers: [CommonProvider]
+  providers: [RequestProvider]
 })
 export class BillDetailsPage {
   @ViewChild(Navbar) navs: Navbar;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public common: CommonProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public req: RequestProvider) {
   }
 
   ionViewDidLoad() {
     this.navs.setBackButtonText('返回');
     this.bill = this.navParams.data.bill;
-    console.log(this.bill);
     this._getStoreInfo();
   }
 
@@ -33,9 +32,9 @@ export class BillDetailsPage {
   storeInfo: any;
 
   _getStoreInfo() {
-   this.common.$http('get',`https://loclife.365gl.com/lifeAPI/merchant/detail/${this.bill.merchantNo}`)
-     .subscribe(res => {
-       this.storeInfo = res['data'];
-     })
+    this.req.$http('get',`https://loclife.365gl.com/lifeAPI/merchant/detail/${this.bill.merchantNo}`)
+      .subscribe(res => {
+        this.storeInfo = res['data'];
+      })
   }
 }
