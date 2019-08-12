@@ -1,5 +1,5 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
-import {IonicPage, NavController, NavParams, Slides, Content, ModalController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Slides, Content} from 'ionic-angular';
 import {CommonProvider} from '../../providers/common/common';
 import {MineServiceProvider} from '../../providers/services/mine.service';
 import {Observable} from 'rxjs/Observable';
@@ -29,7 +29,7 @@ export class MinePage {
               public navParams: NavParams,
               private common: CommonProvider,
               private el: ElementRef,
-              private mineServiceProvider: MineServiceProvider, private modalCtrl: ModalController) {
+              private mineServiceProvider: MineServiceProvider) {
   }
 
   private ERR_OK = '000000';

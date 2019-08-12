@@ -23,7 +23,6 @@ export class StoreNearbyPage implements OnInit {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private http: HttpClient,
-              private common: CommonProvider,
               private req: RequestProvider) {
   }
 

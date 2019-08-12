@@ -1,19 +1,20 @@
-import {NgModule, ErrorHandler} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
-import {CommonModule} from '@angular/common';
-import {MyApp} from './app.component';
-import {StatusBar} from '@ionic-native/status-bar';
-import {SplashScreen} from '@ionic-native/splash-screen';
-import {QRScanner} from '@ionic-native/qr-scanner';
-import {AndroidFullScreen} from '@ionic-native/android-full-screen';
-import {Toast} from '@ionic-native/toast';
-import {ScreenOrientation} from '@ionic-native/screen-orientation';
-import {ImagePicker} from '@ionic-native/image-picker';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { CommonModule } from '@angular/common';
+import { MyApp } from './app.component';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { QRScanner } from '@ionic-native/qr-scanner';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { AndroidFullScreen } from '@ionic-native/android-full-screen';
+import { Toast } from '@ionic-native/toast';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { ImagePicker } from '@ionic-native/image-picker';
 import { ImageResizer } from '@ionic-native/image-resizer';
 import { Crop } from '@ionic-native/crop';
-import {HttpClientModule} from '@angular/common/http';
-import {RequestProvider} from '../providers/services/request.service'
+import { HttpClientModule } from '@angular/common/http';
+import { RequestProvider } from '../providers/services/request.service'
 
 
 @NgModule({
@@ -37,8 +38,9 @@ import {RequestProvider} from '../providers/services/request.service'
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     QRScanner,
+    InAppBrowser,
     AndroidFullScreen,
     Toast,
     ScreenOrientation,

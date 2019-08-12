@@ -16,8 +16,8 @@ import {IonicPage, Tabs, NavController} from 'ionic-angular';
 export class TabsPage {
 
   tab1Root = 'HomePage';
-  tab2Root = 'StoreNearbyPage';
-  tab3Root = 'MinePage';
+  tab2Root = 'HomePage';
+  tab3Root = 'HomePage';
 
   @ViewChild('myTabs') tabRef: Tabs;
   constructor(public navCtrl: NavController) {
@@ -28,7 +28,8 @@ export class TabsPage {
     if (localStorage.getItem('token')) {
       this.tabRef.select(2);
     } else {
-      this.navCtrl.push('LoginPage')
+      this.tabRef.select(2);
+      // this.navCtrl.push('LoginPage')
     }
   }
 }

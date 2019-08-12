@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController} from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 /**
  * Generated class for the ScanPage page.
@@ -19,7 +20,8 @@ export class ScannerPage {
 
   constructor(
     private navCtrl: NavController,
-    private qrScanner: QRScanner) {
+    private qrScanner: QRScanner,
+    private iab: InAppBrowser) {
     //默认为false
     this.light = false;
     this.frontCamera = false;
@@ -32,7 +34,7 @@ export class ScannerPage {
           // camera permission was granted
           // start scanning
           let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-            alert(text);
+            this.iab.create(text, '_self', { clearcache: 'yes', clearsessioncache: 'yes' });
             this.qrScanner.hide(); // hide camera preview
             scanSub.unsubscribe(); // stop scanning
             this.navCtrl.pop();
@@ -53,7 +55,7 @@ export class ScannerPage {
       .catch((e: any) => console.log('Error is', e));
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     //页面可见时才执行
     this.showCamera();
   }
